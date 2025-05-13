@@ -5,28 +5,28 @@ import 'package:inst_pay/core/style/colors.dart';
 class AppTextStyle {
   static TextStyle greyTextStyle = TextStyle(
     fontWeight: FontWeight.w500,
-    fontSize: 12.sp,
+    fontSize: 16.sp,
     color: AppColors.grey,
   );
   static TextStyle smallGreyTextStyle = TextStyle(
     fontWeight: FontWeight.w500,
-    fontSize: 8.sp,
+    fontSize: 12.sp,
     color: AppColors.grey,
   );
   static TextStyle smallRedTextStyle = TextStyle(
     fontWeight: FontWeight.w500,
-    fontSize: 8.sp,
+    fontSize: 12.sp,
     color: AppColors.secondary,
   );
   static TextStyle titleTextStyle = TextStyle(
     fontWeight: FontWeight.w700,
-    fontSize: 20.sp,
+    fontSize: 35.sp,
     color: AppColors.primary,
   );
 
   static TextStyle buttonTextStyle = TextStyle(
     fontWeight: FontWeight.w500,
-    fontSize: 14.sp,
+    fontSize: 20.sp,
     color: Colors.white,
   );
   static TextStyle redTextStyle = TextStyle(
@@ -41,7 +41,12 @@ class AppTextStyle {
   );
   static TextStyle smallBlackTextStyle = TextStyle(
     fontWeight: FontWeight.w400,
-    fontSize: 10.sp,
+    fontSize: 12.sp,
+    color: AppColors.black,
+  );
+  static TextStyle blackTextStyle = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 14.sp,
     color: AppColors.black,
   );
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inst_pay/core/style/text_styles.dart';
 
 class LanguageInput extends StatefulWidget {
   final String? value;
@@ -47,7 +48,7 @@ class _LanguageInputState extends State<LanguageInput> {
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value),
+                    child: Text(value, style: AppTextStyle.blackTextStyle),
                   );
                 }).toList(),
           ),

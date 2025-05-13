@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inst_pay/core/style/colors.dart';
 import 'package:inst_pay/core/style/text_styles.dart';
 import 'package:inst_pay/presentation/ui/screens/authentication/signup_screen.dart';
+import 'package:inst_pay/presentation/ui/screens/success_screen.dart';
 import 'package:inst_pay/presentation/ui/widgets/app_bar/auth_appbar.dart';
 import 'package:inst_pay/presentation/ui/widgets/buttons/main_buttons.dart';
 import 'package:inst_pay/presentation/ui/widgets/input/input.dart';
@@ -45,7 +46,11 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 PrimaryButton(
-                  click: () {},
+                  click: () {
+                    Navigator.of(
+                      context,
+                    ).push(MaterialPageRoute(builder: (_) => SuccessScreen()));
+                  },
                   text: "Login",
                   color: AppColors.primary,
                 ),

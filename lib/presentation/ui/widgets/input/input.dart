@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:inst_pay/core/style/colors.dart';
+import 'package:inst_pay/core/style/text_styles.dart';
 import 'package:inst_pay/core/utils/svg.dart';
 
 // ignore: must_be_immutable
@@ -41,6 +42,7 @@ class _InputTextState extends State<InputText> {
   Widget build(BuildContext context) {
     return TextFormField(
       maxLength: widget.length,
+      style: AppTextStyle.blackTextStyle,
       validator: widget.validator,
       controller: widget.controler,
       obscureText: obs,

@@ -20,42 +20,45 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
 
-      body: FutureBuilder(
-        future: init(context, 3),
-        builder: (context, snapshot) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: MediaQuery.sizeOf(context).height,
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset("assets/Sibtel.png"),
-                  Text(
-                    "For fast and secure transactions",
-                    style: AppTextStyle.greyTextStyle,
-                  ),
-                  Spacer(),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Secured by',
-                          style: AppTextStyle.smallGreyTextStyle,
-                        ),
-                        TextSpan(
-                          text: ' SIBTEL',
-                          style: AppTextStyle.smallRedTextStyle,
-                        ),
-                      ],
+      body: SafeArea(
+        child: FutureBuilder(
+          future: init(context, 3),
+          builder: (context, snapshot) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: MediaQuery.sizeOf(context).height,
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Spacer(),
+                    Image.asset("assets/Sibtel.png"),
+                    Text(
+                      "For fast and secure transactions",
+                      style: AppTextStyle.greyTextStyle,
                     ),
-                  ),
-                ],
+                    Spacer(),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Secured by',
+                            style: AppTextStyle.smallGreyTextStyle,
+                          ),
+                          TextSpan(
+                            text: ' SIBTEL',
+                            style: AppTextStyle.smallRedTextStyle,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

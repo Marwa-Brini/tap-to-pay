@@ -13,7 +13,7 @@ class LandingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: const Color.fromARGB(255, 251, 250, 250),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -22,19 +22,19 @@ class LandingScreen extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               children: [
                 AspectRatio(
-                  aspectRatio: 1.8,
+                  aspectRatio: 1.5,
 
-                  child: ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                      const Color.fromARGB(93, 91, 90, 90),
-                      BlendMode.lighten,
-                    ),
-                    child: Image.asset(
-                      "assets/image cover.jpg",
-                      fit: BoxFit.cover,
-                    ),
+                  child: Image.asset(
+                    "assets/image cover.jpg",
+                    fit: BoxFit.cover,
                   ),
                 ),
+                Expanded(
+                  child: Container(
+                    color: Colors.black.withOpacity(0.5), // Adjust the opacity
+                  ),
+                ),
+
                 Positioned(
                   bottom: 10,
 
@@ -42,7 +42,7 @@ class LandingScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             Text("Welcome!", style: AppTextStyle.titleTextStyle),
             Padding(
               padding: const EdgeInsets.all(15.0),
