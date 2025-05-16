@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_svg/svg.dart';
 import 'package:inst_pay/core/style/colors.dart';
 import 'package:inst_pay/core/style/text_styles.dart';
@@ -9,6 +10,8 @@ class InputText extends StatefulWidget {
   final String hint;
   bool? isPassword;
   final String? leading;
+  final Widget? suffixText;
+  final bool? enabled;
   final String? Function(String?)? validator;
   final TextEditingController? controler;
   final int? length;
@@ -17,8 +20,10 @@ class InputText extends StatefulWidget {
     super.key,
     required this.hint,
     this.isPassword,
+    this.suffixText,
     this.type,
     this.controler,
+    this.enabled,
     this.validator,
     this.length,
     this.leading,
@@ -46,8 +51,15 @@ class _InputTextState extends State<InputText> {
       validator: widget.validator,
       controller: widget.controler,
       obscureText: obs,
+
       keyboardType: widget.type ?? TextInputType.text,
       decoration: InputDecoration(
+        enabled: widget.enabled ?? true,
+        labelText: widget.hint,
+        floatingLabelStyle: AppTextStyle.greyTextStyle,
+        disabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.grey),
+        ),
         errorBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.secondary),
         ),
@@ -61,14 +73,13 @@ class _InputTextState extends State<InputText> {
           horizontal: 10,
           vertical: 10,
         ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(35),
-          borderSide: BorderSide.none,
-        ),
+
         filled: true,
-        floatingLabelBehavior: FloatingLabelBehavior.never,
+        floatingLabelBehavior: FloatingLabelBehavior.auto,
+        floatingLabelAlignment: FloatingLabelAlignment.start,
         fillColor: AppColors.white.withOpacity(0.3),
-        hintText: widget.hint,
+        //  hintText: widget.hint,
+        //suffix: widget.suffix,
         prefixIcon:
             widget.leading == null
                 ? null
@@ -79,8 +90,11 @@ class _InputTextState extends State<InputText> {
                     fit: BoxFit.scaleDown,
                   ),
                 ),
+
+        //suffixText: widget.suffixText,
         suffixIcon:
-            widget.isPassword ?? false
+            widget.suffixText ??
+            (widget.isPassword ?? false
                 ? InkWell(
                   onTap: () {
                     setState(() {
@@ -90,7 +104,7 @@ class _InputTextState extends State<InputText> {
                   },
                   child: SvgPicture.string(icon, fit: BoxFit.scaleDown),
                 )
-                : null,
+                : null),
       ),
     );
   }

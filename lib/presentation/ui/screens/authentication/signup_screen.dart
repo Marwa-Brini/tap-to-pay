@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:inst_pay/core/style/colors.dart';
 import 'package:inst_pay/core/style/text_styles.dart';
 import 'package:inst_pay/core/utils/string_const.dart';
+import 'package:inst_pay/core/utils/svg.dart';
 import 'package:inst_pay/presentation/state_mangement/authentication_controller.dart';
 import 'package:inst_pay/presentation/ui/screens/authentication/login_screen.dart';
+import 'package:inst_pay/presentation/ui/screens/success_screen.dart';
 import 'package:inst_pay/presentation/ui/widgets/app_bar/auth_appbar.dart';
 import 'package:inst_pay/presentation/ui/widgets/buttons/main_buttons.dart';
 import 'package:inst_pay/presentation/ui/widgets/input/input.dart';
@@ -63,22 +65,12 @@ class _SignupScreenState extends State<SignupScreen> {
 
                 const SizedBox(height: 30),
                 InputText(
-                  hint: "first name",
+                  hint: "user name",
                   controler: firstname,
+                  leading: APPSVG.userIcon,
                   validator: (v) {
                     if (v!.isEmpty) {
-                      return "first name required";
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 25),
-                InputText(
-                  hint: "last name",
-                  controler: lastname,
-                  validator: (v) {
-                    if (v!.isEmpty) {
-                      return "last name required";
+                      return "user name required";
                     }
                     return null;
                   },
@@ -88,6 +80,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   hint: "email",
                   type: TextInputType.emailAddress,
                   controler: email,
+                  leading: APPSVG.emailIcon,
                   validator: (v) {
                     if ((!v!.endsWith('@gmail.com') &&
                             !v.endsWith('@yahoo.fr') &&
@@ -103,6 +96,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   hint: "password",
                   isPassword: true,
                   controler: password,
+                  leading: APPSVG.lockIcon,
                   validator: (v) {
                     if (v!.length < 8) {
                       return "invalid password";
@@ -115,6 +109,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   hint: "confirm_password",
                   isPassword: true,
                   controler: cpassword,
+                  leading: APPSVG.lockIcon,
                   validator: (v) {
                     if (v != password.text || v!.isEmpty) {
                       return "password_does_not_match";
@@ -190,7 +185,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           await controller.createAccount().then(
                             (value) => Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (_) => const LoginScreen(),
+                                builder: (_) => const SuccessScreen(),
                               ),
                             ),
                           );

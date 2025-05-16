@@ -21,7 +21,7 @@ class AuthAppbar extends StatelessWidget implements PreferredSizeWidget {
               ],
           child: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Icon(Icons.translate),
+            child: Icon(Icons.language),
           ),
           onSelected: (v) async {
             // c.setLocal(v);

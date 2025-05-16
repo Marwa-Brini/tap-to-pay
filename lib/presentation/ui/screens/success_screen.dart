@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:inst_pay/core/style/colors.dart';
 import 'package:inst_pay/core/style/text_styles.dart';
 import 'package:inst_pay/core/utils/svg.dart';
+import 'package:inst_pay/presentation/ui/screens/authentication/login_screen.dart';
 import 'package:inst_pay/presentation/ui/widgets/buttons/main_buttons.dart';
 
 class SuccessScreen extends StatelessWidget {
@@ -16,7 +18,11 @@ class SuccessScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.string(APPSVG.checkIcon, width: 200),
+            SvgPicture.string(
+              APPSVG.checkIcon,
+              width: 200.w,
+              color: AppColors.green,
+            ),
             const SizedBox(height: 30),
             Text("Successfully", style: AppTextStyle.titleTextStyle),
             const SizedBox(height: 10),
@@ -26,7 +32,11 @@ class SuccessScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             PrimaryButton(
-              click: () {},
+              click: () {
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (_) => LoginScreen()));
+              },
               color: AppColors.primary,
               text: "Finish",
             ),
