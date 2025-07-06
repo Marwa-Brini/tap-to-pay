@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:inst_pay/controller/bank_controller.dart';
+import 'package:inst_pay/controller/bankaccount_controller.dart';
 import 'package:inst_pay/core/style/colors.dart';
 import 'package:inst_pay/core/style/text_styles.dart';
 import 'package:inst_pay/core/utils/svg.dart';
 import 'package:inst_pay/presentation/state_mangement/drawer_controller.dart';
 import 'package:inst_pay/presentation/state_mangement/profile_screen_controller.dart';
-import 'package:inst_pay/presentation/ui/widgets/buttons/main_buttons.dart';
+import 'package:inst_pay/presentation/ui/screens/bank_account/associate_account_screen.dart';
 import 'package:inst_pay/presentation/ui/widgets/drawer/drawer.dart';
 import 'package:inst_pay/presentation/ui/widgets/profile/bank_account_item.dart';
 import 'package:inst_pay/presentation/ui/widgets/profile/invoice_item.dart';
@@ -50,10 +52,13 @@ class ProfileScreen extends StatelessWidget {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.network(
-                      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Qrcode_wikipedia_fr_v2clean.png/960px-Qrcode_wikipedia_fr_v2clean.png",
-                      width: 100.w,
-                      fit: BoxFit.cover,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Image.network(
+                        "https://i.pinimg.com/1200x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg",
+                        width: 100.w,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     const SizedBox(height: 20),
                     Text("Marwa_BRINI", style: AppTextStyle.boldBlackTextStyle),
@@ -62,14 +67,7 @@ class ProfileScreen extends StatelessWidget {
                       "marwa_brini@gmail.Com",
                       style: AppTextStyle.greyTextStyle14,
                     ),
-                    const SizedBox(height: 20),
-                    PrimaryButton(
-                      color: AppColors.primary,
-                      text: 'Edit profile',
-                      click: () {},
-                      width: 150.w,
-                      height: 50.h,
-                    ),
+
                     const SizedBox(height: 30),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -98,9 +96,18 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           child: Align(
                             alignment: Alignment.topRight,
-                            child: Text(
-                              'New Account',
-                              style: AppTextStyle.textButtonStyle,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => AssociateAccountScreen(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'New Account',
+                                style: AppTextStyle.textButtonStyle,
+                              ),
                             ),
                           ),
                         )
@@ -122,25 +129,34 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         )
                         : const SizedBox(),
-                    Expanded(
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: 5,
-                        itemBuilder:
-                            (_, index) => Padding(
-                              padding: const EdgeInsets.only(
-                                right: 20.0,
-                                left: 20.0,
-                                bottom: 10,
-                              ),
-                              child:
-                                  controller.selectedIndex == 0
-                                      ? BankAccountItem()
-                                      : controller.selectedIndex == 1
-                                      ? TransactionHistoryItem()
-                                      : InvoiceItem(isLastItem: index == 4),
-                            ),
-                      ),
+                    GetBuilder(
+                      init: BankAccountController(),
+                      builder: (bankController) {
+                        return Expanded(
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: bankController.bankAccountList.length,
+                            itemBuilder:
+                                (_, index) => Padding(
+                                  padding: const EdgeInsets.only(
+                                    right: 20.0,
+                                    left: 20.0,
+                                    bottom: 10,
+                                  ),
+                                  child:
+                                      controller.selectedIndex == 0
+                                          ? BankAccountItem(
+                                            bankAccountModel:
+                                                bankController
+                                                    .bankAccountList[index],
+                                          )
+                                          : controller.selectedIndex == 1
+                                          ? TransactionHistoryItem()
+                                          : InvoiceItem(isLastItem: index == 4),
+                                ),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 );

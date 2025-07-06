@@ -13,6 +13,7 @@ class InputText extends StatefulWidget {
   final Widget? suffixText;
   final bool? enabled;
   final String? Function(String?)? validator;
+  final Function(String)? onchange;
   final TextEditingController? controler;
   final int? length;
   final TextInputType? type;
@@ -25,6 +26,7 @@ class InputText extends StatefulWidget {
     this.controler,
     this.enabled,
     this.validator,
+    this.onchange,
     this.length,
     this.leading,
   });
@@ -49,6 +51,7 @@ class _InputTextState extends State<InputText> {
       maxLength: widget.length,
       style: AppTextStyle.blackTextStyle,
       validator: widget.validator,
+      onChanged: widget.onchange,
       controller: widget.controler,
       obscureText: obs,
 

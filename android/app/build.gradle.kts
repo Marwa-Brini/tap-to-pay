@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.inst_pay"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = flutter.compileSdkVersion    
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
