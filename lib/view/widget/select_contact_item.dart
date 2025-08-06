@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:inst_pay/controller/contact_controller.dart';
 import 'package:inst_pay/core/style/text_styles.dart';
+import 'package:inst_pay/model/contact_model.dart';
 
 class SelectContactItem extends StatelessWidget {
   final bool isLastItem;
-  final String rib;
+  final ContactModel contactModel;
 
   const SelectContactItem({
     super.key,
     required this.isLastItem,
-    required this.rib,
+    required this.contactModel,
   });
 
   @override
@@ -23,22 +25,24 @@ class SelectContactItem extends StatelessWidget {
           children: [
             ListTile(
               leading: Radio<String>.adaptive(
-                value: '654837458729874$rib',
+                value: contactModel.rib,
                 groupValue: controller.selectedContact,
                 onChanged: (v) {
                   controller.selectContact(v!);
                 },
               ),
               title: Text(
-                'Marwa BRINI, Ariana',
+                contactModel.name,
                 style: AppTextStyle.boldBlackTextStyle14,
               ),
               subtitle: Text(
-                'RIB: 654837458729874$rib',
+                'RIB: ${contactModel.rib}',
                 style: AppTextStyle.greyTextStyle14,
               ),
               trailing: Image.network(
-                "https://play-lh.googleusercontent.com/_dObGcNUCiZugiDIW_iuEVDIsulknrSEmMJNBVmgNChDf2W4wM-CCNGrmXVontsfzg",
+                contactModel.bankImage!,
+                width: 50.w,
+                fit: BoxFit.cover,
               ),
             ),
             isLastItem

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inst_pay/controller/bank_controller.dart';
+import 'package:inst_pay/controller/bankaccount_controller.dart';
 import 'package:inst_pay/core/style/colors.dart';
 import 'package:inst_pay/core/style/text_styles.dart';
 import 'package:inst_pay/core/utils/svg.dart';
 import 'package:inst_pay/model/bank.dart';
+import 'package:inst_pay/service/remote/bankaccount_remote_service.dart';
 import 'package:inst_pay/view/widget/buttons/main_buttons.dart';
 import 'package:inst_pay/view/widget/input/input.dart';
 import 'package:inst_pay/service/local/bank_service.dart';
@@ -104,20 +106,33 @@ class AssociateAccountScreen extends StatelessWidget {
                                   if (_formkey.currentState!.validate()) {
                                     //  await controller.fetchData(
                                     //   controller.selectedbank!.url,
-                                    // );
 
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder:
-                                            (_) => BankOTPVerificationScreen(
-                                              code: int.parse(
-                                                _editingController.text
-                                                    .substring(0, 2),
-                                              ),
-                                              rib: _editingController.text,
+                                    // );
+                                    final accountcontroller =
+                                        BankAccountController();
+                                    await accountcontroller
+                                        .linkAccount(
+                                          bankUrl: controller.selectedbank!.url,
+                                          rib: _editingController.text,
+                                        )
+                                        .then(
+                                          (_) => Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (_) =>
+                                                      BankOTPVerificationScreen(
+                                                        code: int.parse(
+                                                          _editingController
+                                                              .text
+                                                              .substring(0, 2),
+                                                        ),
+                                                        rib:
+                                                            _editingController
+                                                                .text,
+                                                      ),
                                             ),
-                                      ),
-                                    );
+                                          ),
+                                        );
                                   }
                                 },
                                 text: "Next",

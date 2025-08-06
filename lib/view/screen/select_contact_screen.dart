@@ -16,41 +16,52 @@ class SelectContactScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           backgroundColor: AppColors.background,
-          body: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                foregroundColor: AppColors.black,
-                elevation: 4,
-                snap: true,
-                pinned: true,
-                floating: true,
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      controller.selectfinalContact();
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('select'),
-                  ),
-                ],
-                backgroundColor: AppColors.background,
+          body: FutureBuilder(
+            future: controller.getContacts(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return CustomScrollView(
+                  slivers: [
+                    SliverAppBar(
+                      foregroundColor: AppColors.black,
+                      elevation: 4,
+                      snap: true,
+                      pinned: true,
+                      floating: true,
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            controller.selectfinalContact();
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('select'),
+                        ),
+                      ],
+                      backgroundColor: AppColors.background,
 
-                title: Text(
-                  "Select Contacts",
-                  style: AppTextStyle.appBarTextStyle,
-                ),
-                centerTitle: true,
-              ),
-
-              SliverList.builder(
-                itemCount: 10,
-                itemBuilder:
-                    (_, index) => SelectContactItem(
-                      isLastItem: index == 9,
-                      rib: index.toString(),
+                      title: Text(
+                        "Select Contacts",
+                        style: AppTextStyle.appBarTextStyle,
+                      ),
+                      centerTitle: true,
                     ),
-              ),
-            ],
+
+                    SliverList.builder(
+                      itemCount: controller.contact.length,
+                      itemBuilder:
+                          (_, index) => SelectContactItem(
+                            isLastItem: index == controller.contact.length - 1,
+                            contactModel: controller.contact[index],
+                          ),
+                    ),
+                  ],
+                );
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else {
+                return Center(child: Text('No contacts found'));
+              }
+            },
           ),
         );
       },

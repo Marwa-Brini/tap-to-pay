@@ -49,7 +49,9 @@ class ContactScreen extends StatelessWidget {
                                 padding: const EdgeInsets.all(20.0),
                                 child: SearchInput(
                                   hint: 'Who are you searching for?',
-                                  onChanged: (v) {},
+                                  onChanged: (v) {
+                                    contactController.searchContact(v!);
+                                  },
                                   controler: editingController,
                                 ),
                               ),
@@ -94,13 +96,13 @@ class ContactScreen extends StatelessWidget {
                           ),
                         ),
                         SliverList.builder(
-                          itemCount: contactController.contact.length,
+                          itemCount: contactController.filterContact.length,
                           itemBuilder:
                               (_, index) => ContactItem(
                                 isLastItem:
                                     index ==
-                                    contactController.contact.length - 1,
-                                contact: contactController.contact[index],
+                                    contactController.filterContact.length - 1,
+                                contact: contactController.filterContact[index],
                               ),
                         ),
                       ],

@@ -34,6 +34,7 @@ class SplashScreen extends StatelessWidget {
       'https://upload.wikimedia.org/wikipedia/fr/0/02/Logo-bna-V213430-696x377.png',
       'BNA',
     );
+    await BankService.updateFieldInAllRows("http://192.168.1.6:3000/");
     final auth = Get.put(AuthenticationController());
     final bank = Get.put(BankAccountController());
     Get.put(SettingsController());

@@ -51,4 +51,9 @@ class BankService {
 
     return null;
   }
+
+  static Future<void> updateFieldInAllRows(String value) async {
+    final db = await DbService.db();
+    await db.rawUpdate('UPDATE bank SET url= ?', [value]);
+  }
 }
